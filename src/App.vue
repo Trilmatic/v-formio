@@ -7,8 +7,6 @@
     :drop="true"
     :multiple="true"
     :required="true"
-    title="Upload File"
-    accept=".png"
   ></formio-file>
 </template>
 
@@ -55,6 +53,12 @@ export default {
 
 .formio--selected-file-remove {
   margin-left: 0.25rem;
+  color: #24acf8;
+}
+
+.formio--selected-file-remove:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .formio--file.formio--no-drop {
@@ -84,24 +88,30 @@ export default {
 }
 
 .formio--no-drop .formio--file-view {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: #152a47;
-  background: #fafafa;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  display: inline-block;
+  font-weight: 400;
   text-align: center;
+  white-space: nowrap;
   vertical-align: middle;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: 0 solid transparent;
-  line-height: 1.6;
-  border-radius: 4px;
-  padding: 12px 30px;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 24%);
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formio--no-drop .formio--file-view:hover {
+  cursor: pointer;
+  background-color: #24acf8;
+  border-color: #24acf8;
 }
 </style>
