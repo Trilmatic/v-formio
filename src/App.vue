@@ -1,117 +1,117 @@
 <template>
-  <div>
-    <button @click="$refs.file.validate()">Validate</button>
-  </div>
-  <formio-file
-    ref="file"
-    :drop="true"
-    :multiple="true"
-    :required="true"
-  ></formio-file>
+  <form ref="$form" @submit.prevent="submit()"></form>
 </template>
 
 <script>
-import FormioFile from "./components/FormioFile.vue";
+import FormBuilder from "@trilmatic/form-builder";
+import "@trilmatic/form-builder/src/tabs.css";
+import "@trilmatic/form-builder/src/sections.css";
+import "@trilmatic/form-builder/src/rows.css";
+import "@trilmatic/form-builder/src/forms.css";
 
 export default {
   name: "App",
-  components: {
-    FormioFile,
+  data() {
+    return {
+      endpoint: "/submit",
+      tabs: [
+        {
+          id: "tab1",
+          label: "Tab 1",
+          selected: true,
+          sections: [
+            {
+              id: "personal-section",
+              label: "Personal Information",
+              rows: [
+                {
+                  id: "row1",
+                  schema: [
+                    {
+                      id: "firstname",
+                      type: "text",
+                      label: "First Name",
+                      placeholder: "First Name",
+                      required: true,
+                      onChange: () => {
+                        console.log(this.data);
+                      },
+                    },
+                    {
+                      id: "lastname",
+                      type: "text",
+                      label: "Last Name",
+                      required: true,
+                      onChange: () => {
+                        console.log(this.data);
+                      },
+                    },
+                    {
+                      id: "test",
+                      type: "text",
+                      label: "Last Name",
+                      required: true,
+                      onChange: () => {
+                        console.log(this.data);
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "tab2",
+          label: "Tab 2",
+          selected: false,
+          disabled: true,
+        },
+      ],
+      /*schema: {
+        foo: {
+          label: "foo",
+          type: "text",
+          required: true,
+          disabled: (value) => {
+            if (value == "foo") return true;
+            return false;
+          },
+          onChange: () => {
+            console.log(this.data.foo);
+          },
+        },
+        bar: {
+          label: "bar",
+          type: "email",
+          debounce: 1000,
+          placeholder: "Placeholder",
+          required: true,
+        },
+        aaa: {
+          type: "hidden",
+        },
+        submitBtn: {
+          type: "button",
+          btnType: "button",
+          html: "Check Data",
+          onClick: () => {
+            console.log(this.$refs);
+          },
+        },
+      },*/
+    };
   },
+  mixins: [FormBuilder],
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Rubik", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   padding: 2rem;
-}
-
-.formio--file-input {
-  display: none;
-}
-
-.formio--label {
-  margin-bottom: 0.5rem;
-}
-
-.formio--required {
-  margin-left: 0.25rem;
-  color: red;
-}
-
-.formio--validation-error {
-  color: red;
-}
-
-.formio--selected-file-icon {
-  margin-right: 0.25rem;
-}
-
-.formio--selected-file-remove {
-  margin-left: 0.25rem;
-  color: #24acf8;
-}
-
-.formio--selected-file-remove:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.formio--file.formio--no-drop {
-  display: inline-block;
-}
-
-.formio--drop-zone .formio--file-view {
-  background: #fafafa;
-  padding: 30px;
-  border: 1px dashed #e7e7e7;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.3s;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.formio--selected-file {
-  margin-bottom: 0.25rem;
-}
-
-.formio--drop-zone .formio--file-view:hover {
-  border: 1px dashed #24acf8;
-}
-
-.formio--no-drop .formio--file-view {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.formio--no-drop .formio--file-view:hover {
-  cursor: pointer;
-  background-color: #24acf8;
-  border-color: #24acf8;
 }
 </style>
